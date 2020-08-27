@@ -1,0 +1,14 @@
+﻿<div style="height:500px;width:100%;display:flex;justify-content:center;align-items:center;">
+    <div class="text-primary">
+        <h1 class="text-success">Mail Has been Sent to Your Email now you can verify your account</h1>
+    </div>
+</div>
+@if (TempData.ContainsKey("Successmessage"))
+{
+    <script>
+        swal("Good job!", "@TempData["Successmessage"]", "success", {
+            button: "Aww yiss!",
+        });
+    </script>
+}
+

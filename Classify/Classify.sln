@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1082
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classify", "Classify\Classify.csproj", "{650EDE52-13B8-4522-87E0-4FA51AEE06DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classify.Tests", "Classify.Tests\Classify.Tests.csproj", "{497549CA-D65C-4B83-ADA3-349D38D1CBCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{650EDE52-13B8-4522-87E0-4FA51AEE06DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650EDE52-13B8-4522-87E0-4FA51AEE06DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650EDE52-13B8-4522-87E0-4FA51AEE06DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650EDE52-13B8-4522-87E0-4FA51AEE06DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{497549CA-D65C-4B83-ADA3-349D38D1CBCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{497549CA-D65C-4B83-ADA3-349D38D1CBCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{497549CA-D65C-4B83-ADA3-349D38D1CBCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{497549CA-D65C-4B83-ADA3-349D38D1CBCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CF36C761-9B35-4D85-A551-4AC0743BC790}
+	EndGlobalSection
+EndGlobal

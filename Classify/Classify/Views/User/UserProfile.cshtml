@@ -1,0 +1,72 @@
+﻿@model Classify.Models.User
+@if (TempData.ContainsKey("Successmessage"))
+{
+    <script>
+        swal("Done!", "@TempData["Successmessage"]", "success", {
+            button: "Ok",
+        });
+    </script>
+}
+<section id="page-head">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="page-heading">
+                <h1>@Model.Firstname @Model.Lastname</h1>
+                <h4>Owner</h4>
+                <br />
+                <div class="text-center">
+                    <a href="/User/Edit/@Model.Id" class="btn btn-primary"><i class="fa fa-edit"> Edit Profile</i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!--end main page heading-->
+<!--Detail -->
+<section id="detail">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="author-profile-details">
+                    <h4 class="inner-heading">GENERAL DETAILS</h4>
+                    <ul>
+                        <li>
+                            <i class="fa fa-user"></i>
+                            Firstname: @Model.Firstname
+                        </li>
+                        <li>
+                            <i class="fa fa-user"></i>
+                            Lastname: @Model.Lastname
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="author-profile-details">
+                    <h4 class="inner-heading">CONTACT DETAILS</h4>
+                    <ul>
+                        <li>
+                            <i class="fa fa-map-marker"></i>
+                            Address: @Model.Address
+                        </li>
+                        <li>
+                            <i class="fa fa-code"></i>
+                            Zipcode: @Model.Zipcode
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            Phone: @Model.Contactnumber
+                        </li>
+
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            Email: <a href="#" class="col">@Model.Email</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>

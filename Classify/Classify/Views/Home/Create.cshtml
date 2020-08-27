@@ -1,0 +1,82 @@
+﻿@model Classify.Models.Product
+<section id="page-head">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="page-heading">
+                <h1>NEW AD</h1>
+                <h4>Easy & a simple way to edit</h4>
+            </div>
+        </div>
+    </div>
+</section><!--end main page heading-->
+<!--Detail -->
+<section id="detail">
+    <div class="container">        
+        <div class="row">
+            <form method="post" action="Create" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(model => model.Category, ViewBag.Category2 as SelectList, "Select Category", new { @class = "form-control mb-2", placeholder = "Name" })
+                            @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control mb-2", placeholder = "Name" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control mb-2", placeholder = "Code" } })
+                            @Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control mb-2", placeholder = "Price" } })
+                            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="#Description">Description:</label>
+                            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control mb-2", placeholder = "Description" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="#Status">Status:</label>
+                            @Html.RadioButtonFor(model => model.Status, true, new { htmlAttributes = new { @class = "form-control mb-2" } })
+                            True
+                            @Html.RadioButtonFor(model => model.Status, false, new { htmlAttributes = new { @class = "form-control mb-2" } })
+                            False
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.Discount, new { htmlAttributes = new { @class = "form-control mb-2", placeholder = "Discount" } })
+                            @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="file" name="ProductImg" placeholder="upload image here" id="UploadImage" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" value="Publish Ad" class="btn btn-primary" name="submit">
+                            <input type="reset" value="Reset" class="btn btn-warning">
+                        </div>
+                    </div>
+                    <br />
+                </div>
+                <div class="col-sm-6 text-center">
+                    <img src="~/images/Default.png" id="UploadProductImage" style="border:solid Red;height:250px;width:250px;" />
+                </div>
+            </form>
+        </div>
+    </div>
+</section><!--end details-->

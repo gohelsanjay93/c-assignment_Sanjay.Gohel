@@ -1,0 +1,58 @@
+﻿@model Classify.Models.User
+@if (TempData.ContainsKey("Error"))
+{
+    <script>
+    swal({
+        title: "Oh ruh ruh!",
+        text: "@TempData["Error"].ToString()",
+        icon: "warning"
+    });
+    </script>
+}
+@if (TempData.ContainsKey("VerificationDone"))
+{
+    <script>
+    swal({
+        title: "Congratulations!",
+        text: "@TempData["VerificationDone"].ToString()",
+        icon: "success"
+    });
+    </script>
+}
+<section id="formSubmit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <div class="user-form">
+                    <div class="user-form-set">
+                        <h4>LOGIN</h4>
+                        <form method="post" action="Login" class="form-group">
+                            @Html.AntiForgeryToken()
+                            <div class="form-input">
+                                <span class="fa fa-user form-control-feedback"></span>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <span class="fa fa-unlock-alt form-control-feedback"></span>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password", type = "password" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            @*<div class="form-input">
+            <input type="checkbox">
+            <label>Remember me</label>
+        </div>*@
+                            <div class="form-input">
+                                <input type="submit" name="login" value="login">
+                            </div>
+                            @*<div class="form-input">
+            <p><a href="#">Forgot Password?</a></p>
+        </div>*@
+                        </form>
+                        <p>Are you a new here? <a href="/User/Register" class="col">Get Register Free</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

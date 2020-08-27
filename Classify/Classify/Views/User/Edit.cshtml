@@ -1,0 +1,95 @@
+﻿@model Classify.Models.User
+@if (TempData.ContainsKey("Error"))
+{
+    <script>
+    swal({
+        title: "Oh ruh ruh!",
+        text: "@TempData["Error"].ToString()",
+        icon: "warning"
+    });
+    </script>
+}
+<section id="page-head">
+    <div class="container">
+        <div class="row col-md-12">
+            <div class="page-heading">
+                <h1>EDIT PROFILE</h1>
+                <h4>Editing can be made anytime</h4>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="formSubmit">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+                <div class="user-form">
+                    <div class="user-form-set">
+                        <h4>Edit Profile</h4>
+                        <form method="post" action="/User/Edit" class="form-group">
+                            <input type="hidden" name="Id" value="@Model.Id" />
+                            <div class="form-input">
+                                <span class="fa fa-user form-control-feedback"></span>
+                                @Html.EditorFor(model => model.Firstname, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Firstname" } })
+                                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-input">
+                                <span class="fa fa-user form-control-feedback"></span>
+                                @Html.EditorFor(model => model.Lastname, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Lastname" } })
+                                @Html.ValidationMessageFor(model => model.Lastname, "", new { @class = "text-danger" })
+                            </div>                           
+                            <div class="form-input">
+                                <span class="fa fa-home form-control-feedback"></span>
+                                @Html.TextAreaFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @style = "width:100%;" } })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>                            
+                            <!--Ajax usage start-->
+                            <div class="row">
+                                <div class="col-sm-4 form-input">
+                                    <select name="Country" id="Country" class="form-control"></select>
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-4 form-input">
+                                    <select name="State" id="State" class="form-control"></select>
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-4 form-input">
+                                    <select name="City" id="City" class="form-control"></select>
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!--Ajax usage end-->
+                            <div class="form-input">
+                                <span class="fa fa-code form-control-feedback"></span>
+                                @Html.EditorFor(model => model.Zipcode, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Zipcode" } })
+                                @Html.ValidationMessageFor(model => model.Zipcode, "", new { @class = "text-danger" })
+                            </div>
+                            @*<div class="form-input">
+                                    <input type="checkbox">
+                                    <label>Remember me</label>
+                                </div>*@
+                            <div class="form-input">
+                                <input type="submit" name="register" value="Edit" id="Edit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+    $(document).ready(function () {
+        localStorage.setItem("SelectedCountry",@Model.Country);
+        localStorage.setItem("SelectedState",@Model.State);
+        localStorage.setItem("SelectedCity",@Model.City);       
+    });    
+</script>
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/owl.carousel.js"></script>
+<script src="~/Scripts/default.js"></script>
+<script src="~/Scripts/EditProfile.js"></script>
+

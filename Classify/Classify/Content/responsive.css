@@ -1,0 +1,99 @@
+@media screen and (min-width: 320px) and (max-width: 360px){
+    /*home page*/
+    .social{
+        margin: 0 0 15px 0;
+    }
+    .links{
+        text-align: left !important;
+        margin: 0 0 15px 0;
+    }
+    .navbar-default .navbar-toggle{
+        position: relative;
+        top: -42px;
+    }
+    #searchBar form .keyword{
+        width: 100% !important;
+    }
+    #searchBar form .label{
+        width: 100% !important;
+    }
+    #searchBar form .label .select{
+        width: 100% !important;
+    }
+    .label{
+        padding: 0 !important;
+        margin-bottom: 5px;
+    }
+    #searchBar form .location-tip{
+        margin: 15px 0 15px 0;
+    }
+    #searchBar form .search-btn{
+        width: 100% !important;
+    }
+
+    /*detail-page*/
+    .carousel{
+        height: 250px;
+    }
+    .carousel-control{
+        width: auto;
+        top: 25%;
+    }
+    .carousel-indicators{
+        top:70% !important;
+    }
+    #detail .author-detail .author-name{
+        margin-bottom: 15px;
+    }
+    #form .input-pad{
+        padding: 0;
+    }
+    /*edit profile*/
+    .author-avatar{
+        top: 0;
+    }
+    .author-name{
+        margin: 140px 0 10px 0;
+    }
+}
+@media screen and (min-width: 480px) and (max-width: 630px){
+    .navbar-default .navbar-toggle{
+        position: relative;
+        top: -42px;
+    }
+    .social{
+        margin: 0 0 15px 0;
+    }
+    .links{
+        text-align: left !important;
+        margin: 0 0 15px 0;
+    }
+    .carousel{
+        height: 300px;
+    }
+    #detail .author-detail .author-name{
+        margin-bottom: 15px;
+    }
+    #form .input-pad{
+        padding: 0;
+    }
+}
+@media screen and (min-width: 640px) and (max-width: 760px){
+    .navbar-default .navbar-toggle{
+        position: relative;
+        top: -42px;
+    }
+    .responsive-width-top{
+        width: 50%;
+        float: left;
+    }
+    .carousel{
+        height: 400px;
+    }
+    #detail .author-detail .author-name{
+        margin-bottom: 15px;
+    }
+    #form .input-pad{
+        padding: 0;
+    }
+}

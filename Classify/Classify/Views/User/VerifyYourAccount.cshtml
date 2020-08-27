@@ -1,0 +1,15 @@
+﻿<div style="height:500px;width:100%;display:flex;justify-content:center;align-items:center;">
+    <div class="text-primary">
+        <h1 class="text-danger">You need to Verify your Account Please go to Email section get verified</h1>
+    </div>
+</div>
+@if (TempData.ContainsKey("Error"))
+{
+    <script>
+    swal({
+        title: "Oh ruh ruh!",
+        text: "@TempData["Error"].ToString()",
+        icon: "error"
+    });
+    </script>
+}

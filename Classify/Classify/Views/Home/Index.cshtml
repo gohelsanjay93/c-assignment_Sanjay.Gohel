@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Classify.Models.Product>
+<!--Category-->
+<section id="categories">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="main-heading text-center">
+                    <h2>CATEGORIES</h2>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between">
+            @foreach(var item in ViewBag.Category)
+            {
+             <div class="col-md-3 col-sm-6">
+                <div class="category">                    
+                    <h4><a href="#">@item.Categoryname</a></h4>
+                </div>
+             </div> 
+            }                        
+        </div>    
+    </div>
+</section><!--End Category-->
+<!--Classify Advertisement-->
+<section id="advertisement">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="main-heading text-center">
+                    <h2>Products</h2>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-12 content content1">
+                <div class="row">                    
+                    @foreach( var item in Model)
+                    {
+                        <div class="col-md-3 col-sm-6 adp">
+                            <div class="ads">
+                                <a href="#"><img src="~/images/Productimages/@item.Image"></a>
+                                <div class="ads-title"><p><a>@item.Name</a></p></div>                                
+                                <div class="ads-hover">
+                                    <div>
+                                        <br />
+                                        <div>
+                                            @if (item.Status == true )
+                                            {
+                                                <span style="color:lawngreen;">In Stock</span>
+                                            }
+                                            else
+                                            {
+                                                <span style="color:red;">Out of Stock</span>
+                                            }
+                                        </div>
+                                        <br />
+                                        <div>
+                                            @if (item.Discount == null || item.Discount == 0)
+                                            {
+                                                <span>$@item.Price</span>
+                                            }
+                                            else
+                                            {
+                                                <span><del>$@item.Price</del></span><span style="color:lawngreen;">$@(item.Price - Convert.ToDecimal(item.Discount))</span>
+                                            }
+                                        </div>
+                                        <br />
+
+                                        <div class="row">
+                                            <div class="col-sm-6 text-center">
+                                                <a href="/Home/Edit/@item.Id" class="btn btn-primary">Edit</a>
+                                            </div>
+                                            <div class="col-sm-6 text-center">
+                                                <button type="button" value="@item.Id" class="btn btn-danger DeleteProduct">Delete</button>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="text-center">
+                                            <input type="checkbox" name="MultipleDelId" value="@item.Id" />
+                                        </div>
+                                        <form action="/Home/Delete" method="post" class="@item.Id">
+                                            <input type="hidden" value="@item.Id" name="Id" />
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }                    
+                </div>
+            </div>           
+        </div> 
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-danger" id="MultipleDelbutton">Multiple Delete</button>
+        </div>  
+        <form action="/Home/DeleteMultiple" method="post" id="MultipleDelForm">
+            <input type="hidden" name="MultipleDelId" id="Ids" />
+        </form>
+    </div>
+</section><!--end advertisement-->
+@if (TempData.ContainsKey("Successmessage"))
+{
+    <script>
+        swal("Good job!", "@TempData["Successmessage"]", "success", {
+            button: "Ok",
+        });
+    </script>
+}
+@if (TempData.ContainsKey("Error"))
+{
+    <script>
+        swal("error", "@TempData["Error"]", "Error", {
+            button: "Ok",
+        });
+    </script>
+}

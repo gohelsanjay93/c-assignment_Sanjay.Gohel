@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ClassifyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Categorymaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Categoryname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_Categorymaster" FromRole="Categorymaster" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Citymaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Cityname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Stateid" Type="Int32" />
+    <NavigationProperty Name="Statemaster" Relationship="Self.FK_Table_1_Statemaster" FromRole="Citymaster" ToRole="Statemaster" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Citymaster" FromRole="Citymaster" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Countrymaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Countryname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Statemasters" Relationship="Self.FK_Statemaster_Countrymaster" FromRole="Countrymaster" ToRole="Statemaster" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Countrymaster" FromRole="Countrymaster" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="Int32" />
+    <Property Name="Code" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Status" Type="Boolean" />
+    <Property Name="Discount" Type="Int32" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Createddate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Categorymaster" Relationship="Self.FK_Product_Categorymaster" FromRole="Product" ToRole="Categorymaster" />
+    <NavigationProperty Name="User" Relationship="Self.FK_Product_User" FromRole="Product" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Statemaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Statename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <NavigationProperty Name="Citymasters" Relationship="Self.FK_Table_1_Statemaster" FromRole="Statemaster" ToRole="Citymaster" />
+    <NavigationProperty Name="Countrymaster" Relationship="Self.FK_Statemaster_Countrymaster" FromRole="Statemaster" ToRole="Countrymaster" />
+    <NavigationProperty Name="Users" Relationship="Self.FK_User_Statemaster" FromRole="Statemaster" ToRole="User" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Lastname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Contactnumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="Int32" />
+    <Property Name="State" Type="Int32" />
+    <Property Name="Country" Type="Int32" />
+    <Property Name="Zipcode" Type="Int32" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="IsVerified" Type="Boolean" />
+    <Property Name="VerificationTokken" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Otp" Type="Int32" />
+    <Property Name="Createddate" Type="DateTime" Precision="3" />
+    <Property Name="Modifieddate" Type="DateTime" Precision="3" />
+    <Property Name="lastlogin" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Citymaster" Relationship="Self.FK_User_Citymaster" FromRole="User" ToRole="Citymaster" />
+    <NavigationProperty Name="Countrymaster" Relationship="Self.FK_User_Countrymaster" FromRole="User" ToRole="Countrymaster" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_User" FromRole="User" ToRole="Product" />
+    <NavigationProperty Name="Statemaster" Relationship="Self.FK_User_Statemaster" FromRole="User" ToRole="Statemaster" />
+    <Property Name="MailSent" Type="Boolean" />
+  </EntityType>
+  <Association Name="FK_Product_Categorymaster">
+    <End Role="Categorymaster" Type="Self.Categorymaster" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categorymaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="Category" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_1_Statemaster">
+    <End Role="Statemaster" Type="Self.Statemaster" Multiplicity="0..1" />
+    <End Role="Citymaster" Type="Self.Citymaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statemaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Citymaster">
+        <PropertyRef Name="Stateid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Citymaster">
+    <End Role="Citymaster" Type="Self.Citymaster" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Citymaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="City" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statemaster_Countrymaster">
+    <End Role="Countrymaster" Type="Self.Countrymaster" Multiplicity="0..1" />
+    <End Role="Statemaster" Type="Self.Statemaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countrymaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Statemaster">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Countrymaster">
+    <End Role="Countrymaster" Type="Self.Countrymaster" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countrymaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Country" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_User">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Statemaster">
+    <End Role="Statemaster" Type="Self.Statemaster" Multiplicity="0..1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statemaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="State" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ClassifyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categorymasters" EntityType="Self.Categorymaster" />
+    <EntitySet Name="Citymasters" EntityType="Self.Citymaster" />
+    <EntitySet Name="Countrymasters" EntityType="Self.Countrymaster" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Statemasters" EntityType="Self.Statemaster" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_Product_Categorymaster" Association="Self.FK_Product_Categorymaster">
+      <End Role="Categorymaster" EntitySet="Categorymasters" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_1_Statemaster" Association="Self.FK_Table_1_Statemaster">
+      <End Role="Statemaster" EntitySet="Statemasters" />
+      <End Role="Citymaster" EntitySet="Citymasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Citymaster" Association="Self.FK_User_Citymaster">
+      <End Role="Citymaster" EntitySet="Citymasters" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statemaster_Countrymaster" Association="Self.FK_Statemaster_Countrymaster">
+      <End Role="Countrymaster" EntitySet="Countrymasters" />
+      <End Role="Statemaster" EntitySet="Statemasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Countrymaster" Association="Self.FK_User_Countrymaster">
+      <End Role="Countrymaster" EntitySet="Countrymasters" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_User" Association="Self.FK_Product_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Statemaster" Association="Self.FK_User_Statemaster">
+      <End Role="Statemaster" EntitySet="Statemasters" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
